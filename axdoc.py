@@ -2,12 +2,14 @@
 
 import os
 import unittest
+import common
 import config
-import config
+import time
+
 from appium import webdriver
 
 
-class YiDa(unittest.TestCase):
+class AxDoc(unittest.TestCase):
     def setUp(self):
         desired_caps = {
             'platformName': config.CONNECT['platformName'],
@@ -24,31 +26,18 @@ class YiDa(unittest.TestCase):
 
     # 测试脚本
     def test_log_in(self):
-        # # 手机登录
-        # login_button = self.driver.find_element_by_id('com.hiyee.anxinhealth:id/login_btn')
-        # assert isinstance(login_button.is_displayed, object)
-        # self.driver.find_element_by_id('com.hiyee.anxinhealth:id/et_content').send_keys("12306050403")
-        # self.driver.find_element_by_id('com.hiyee.anxinhealth:id/et_content').send_keys("3334")
-
-        # 微信登录
+        # 确认进入
         self.driver.implicitly_wait(10)
-        login_btn_wx_button = self.driver.find_element_by_id('com.hiyee.anxinhealth:id/login_btn_wx')
-        self.assertIsNotNone(login_btn_wx_button, '无微信登录入口，请重试')
-        login_btn_wx_button.click()
+        self.driver.find_element_by_id('com.hilficom.anxindoctor:id/login_tv').click()
 
-        # 进入微信登陆页面
-        self.driver.implicitly_wait(10)
-        self.assertIsNotNone(self.driver.find_element_by_class_name('android.widget.FrameLayout'), '未显示微信登录页面')
-        self.driver.swipe(500, 1190, 600, 1190, 0.1)
-        self.assertIsNotNone(self.driver.find_element_by_id('com.hiyee.anxinhealth:id/image_cb'), '登录失败')
+        # 登录
 
-        # print(self.driver.contexts)
-        # self.driver.switch_to_window('WEBVIEW_com.tencent.mm')
-        # self.driver.find_element_by_id('btnOk').click()
+        self.driver.find_element_by_xpath('//android.widget.LinearLayout[@resource-id=\"com.hilficom.anxindoctor:id/password_ll\"]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.EditText[1]').click()
+        time.sleep(5)
 
 
 # unitest.main()函数用来测试 类中以test开头的测试用例
 if __name__ == '__main__':
     # unittest.main()
-    suite = unittest.TestLoader().loadTestsFromTestCase(YiDa)
+    suite = unittest.TestLoader().loadTestsFromTestCase(AxDoc)
     unittest.TextTestRunner(verbosity=3).run(suite)
