@@ -10,6 +10,8 @@ CONNECT = {
     'appActivity': 'com.hilficom.anxindoctor.activity.basic.SplashActivity',
     'unicodeKeyboard': 'true',
     'resetKeyboard': 'true',
-    "deviceReadyTimeout": '5000',
+    'deviceReadyTimeout': '5000',
+    'fullReset': 'true',
     "baseUrl": "http://127.0.0.1:4723/wd/hub",
+
 }
