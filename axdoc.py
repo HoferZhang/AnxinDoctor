@@ -2,7 +2,6 @@
 
 import os
 import unittest
-import common
 import config
 import time
 import logging
@@ -29,8 +28,9 @@ class AxDoc(unittest.TestCase):
         self.driver.close_app()
         self.driver.quit()
 
-    def test_log_in(self):
+    def test_1_login(self):
         # 确认进入
+        print (u'正在进入..')
         self.driver.implicitly_wait(5)
         btn_go = self.driver.find_element_by_id('com.hilficom.anxindoctor:id/login_tv')
         # self.assertEqual('立即进入',go_to.text)
@@ -41,11 +41,12 @@ class AxDoc(unittest.TestCase):
         mobile = self.driver.find_element_by_xpath(
             '//android.widget.EditText[@resource-id=\"com.hilficom.anxindoctor:id/edit_text_et\" and @text=\"手机\"]'
         )
-        mobile.send_keys(u"18500385003")
+        mobile.send_keys(u'12306850060')
         pwd = self.driver.find_element_by_xpath(
             '//android.widget.LinearLayout[@resource-id=\"com.hilficom.anxindoctor:id/password_ll'
             '\"]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.EditText[1]'
         )
+        pwd.clear()
         pwd.send_keys("123456")
         time.sleep(2)
 
@@ -64,12 +65,12 @@ class AxDoc(unittest.TestCase):
         # 发起随访
         self.driver.implicitly_wait(5)
         contact_patient = self.driver.find_element_by_id('com.hilficom.anxindoctor:id/follow_bt')
-        self.assertEqual('联系患者', contact_patient.text)
+        self.assertEqual(u'联系患者', contact_patient.text)
         contact_patient.click()
 
         self.driver.implicitly_wait(5)
         btn_send = self.driver.find_element_by_id('com.hilficom.anxindoctor:id/send_btn')
-        self.assertEqual('发送',btn_send.text)
+        self.assertEqual(u'发送',btn_send.text)
         btn_send.click()
 
         self.driver.implicitly_wait(5)
