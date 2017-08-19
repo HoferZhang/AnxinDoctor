@@ -4,6 +4,7 @@ import os
 import unittest
 import config
 import time
+import common
 import logging
 
 from appium import webdriver
