@@ -6,7 +6,7 @@ CONNECT = {
     'platformName': 'Android',
     'platformVersion': '5.1',
     'deviceName': 'Android Device',
-    'udid':'85UABM8USH8G',
+    'udid':'4LWWWK7P99999999',
     'appPackage': 'com.hilficom.anxindoctor',
     'appActivity': 'com.hilficom.anxindoctor.activity.basic.SplashActivity',
     'deviceReadyTimeout': '5000',

@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import os
-import unittest
-import config
 import time
-import common
+import unittest
 import logging
 
 from appium import webdriver
+
+import config
 
 
 class AxDoc(unittest.TestCase):
@@ -31,7 +30,7 @@ class AxDoc(unittest.TestCase):
 
     def test_1_login(self):
         # 确认进入
-        print (u'正在进入..')
+        logging.debug('正在进入')
         self.driver.implicitly_wait(5)
         btn_go = self.driver.find_element_by_id('com.hilficom.anxindoctor:id/login_tv')
         # self.assertEqual('立即进入',go_to.text)
@@ -53,21 +52,24 @@ class AxDoc(unittest.TestCase):
 
         log_in = self.driver.find_element_by_id('com.hilficom.anxindoctor:id/login_btn')
         log_in.click()
+
+        xieyi = self.driver.find_element_by_id('com.hilficom.anxindoctor:id/tv_ok')
+        xieyi.click()
+
         time.sleep(5)
 
-        # 选择会话列表第一个
-        first_session = self.driver.find_element_by_xpath(
-            '//android.widget.ListView[@resource-id=\"com.hilficom.anxindoctor:id/inquiry_record_lv\"]'
-            '/android.widget.RelativeLayout[1]'
-        )
-        if first_session.is_enabled():
-            first_session.click()
+        # 进入在线咨询
+        SixView = self.driver.find_elements_by_id('com.hilficom.anxindoctor:id/recycleView')
 
-        # 发起随访
+        print(SixView)
+        if SixView[1].is_enabled():
+            SixView[1].click()
+
+        # 选择第一个会话
         self.driver.implicitly_wait(5)
-        contact_patient = self.driver.find_element_by_id('com.hilficom.anxindoctor:id/follow_bt')
-        self.assertEqual(u'联系患者', contact_patient.text)
-        contact_patient.click()
+        SessionList = self.driver.find_element_by_id('com.hilficom.anxindoctor:id/inquiry_record_lv')
+        while len(SessionList) > 0:
+            SessionList[0].click()
 
         self.driver.implicitly_wait(5)
         btn_send = self.driver.find_element_by_id('com.hilficom.anxindoctor:id/send_btn')
